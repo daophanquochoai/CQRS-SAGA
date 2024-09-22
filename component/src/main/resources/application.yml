@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: orderservice
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: root
+    url: jdbc:h2:mem:o
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${instanceId:${random.value}}
+  #    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+#server:
+#  port: 0 # random port
+server:
+  port: 8081
+  error:
+    include-message: always
+    include-binding-errors: always
+
+axon:
+  eventhandling:
+    processors:
+      order-group:
+        mode:
+          subscribing

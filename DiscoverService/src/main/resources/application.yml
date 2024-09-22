@@ -1,0 +1,31 @@
+server:
+  port: 8070
+spring:
+  application:
+    name: "apigateway"
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+    health:
+      probes:
+        enabled: true
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+pattern:
+  level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"

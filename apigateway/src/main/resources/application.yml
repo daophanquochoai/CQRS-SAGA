@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: apigateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      httpclient:
+        connect-timeout: 200000
+        response-timeout: 30s
+eureka:
+  instance:
+    hostname: localhost
+  #    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "Api gateway service"
+    description: "Using fetch about Api gatewau"
+    version: "1.0.0"
+
+server:
+  port: 6371
